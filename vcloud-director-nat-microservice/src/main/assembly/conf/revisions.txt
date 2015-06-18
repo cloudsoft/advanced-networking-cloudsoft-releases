@@ -1,1 +1,2 @@
-advanced-networking: master: 5cf7f95f131c9a489357e08b49af8f806d9c4019
+advanced-networking: add-release-make-script: 8af775fbc889e2010bf43350e6bdcf1dec801ebd
+incubator-brookyn: 0.7.0-20150614.2158
