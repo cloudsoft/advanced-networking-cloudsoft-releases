@@ -1,0 +1,2 @@
+advanced-networking: disable-publicPort-in-rest-call: 67c862e80d5a2be4c10e348023010cb454baf526
+incubator-brookyn: 0.7.0-20150614.2158

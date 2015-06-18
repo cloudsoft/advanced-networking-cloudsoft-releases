@@ -1,0 +1,5 @@
+#NOTE: This is an Aether internal implementation file, its format can be changed without prior notice.
+#Thu Jun 18 12:12:41 BST 2015
+brooklyn-networking-portforwarding-0.7.0-20150618.1158.pom>=
+brooklyn-networking-portforwarding-0.7.0-20150618.1158-tests.jar>=
+brooklyn-networking-portforwarding-0.7.0-20150618.1158.jar>=
