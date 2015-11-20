@@ -32,6 +32,7 @@ import com.vmware.vcloud.sdk.VCloudException;
 
 import brooklyn.location.PortRange;
 import brooklyn.location.basic.PortRanges;
+import brooklyn.networking.vclouddirector.NatService.UpdateResult;
 import brooklyn.util.exceptions.Exceptions;
 import brooklyn.util.task.SingleThreadedScheduler;
 import brooklyn.util.text.Strings;
@@ -369,7 +370,14 @@ public class NatServiceDispatcher {
             NatService service = getService(creds);
             
             NatService.Delta delta = new NatService.Delta().toOpen(toOpen).toClose(toClose);
-            NatService.UpdateResult updated = service.updatePortForwarding(delta);
+            NatService.UpdateResult updated;
+            if (delta.isEmpty()) {
+                LOG.info("Skipping updating NAT rules on {}@{}; delta is empty, given actions {}", 
+                        new Object[] {creds.identity, creds.endpoint, actions});
+            	updated = new UpdateResult();
+            } else {
+            	updated = service.updatePortForwarding(delta);
+            }
             
             for (NatServiceAction action : actions) {
                 switch (action.actionType) {

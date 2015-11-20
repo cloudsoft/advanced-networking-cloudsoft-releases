@@ -17,6 +17,7 @@ import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
+import com.google.common.base.Stopwatch;
 import com.google.common.escape.Escaper;
 import com.google.common.net.HostAndPort;
 import com.google.common.net.UrlEscapers;
@@ -37,6 +38,7 @@ import brooklyn.test.entity.LocalManagementContextForTests;
 import brooklyn.util.exceptions.Exceptions;
 import brooklyn.util.guava.Maybe;
 import brooklyn.util.net.Protocol;
+import brooklyn.util.time.Time;
 
 
 public abstract class NatServiceMicroserviceAbstractLiveTest extends AbstractRestApiTest {
@@ -96,8 +98,9 @@ public abstract class NatServiceMicroserviceAbstractLiveTest extends AbstractRes
                 + "?endpoint="+escaper.escape(endpoint)
                 + "&identity="+escaper.escape(identity)
                 + "&credential="+escaper.escape(credential);
+        Stopwatch stopwatch = Stopwatch.createStarted();
         List<NatRuleSummary> data = client().resource(url).get(new GenericType<List<NatRuleSummary>>() {});
-        LOG.info("/v1/nat gives: "+data);
+        LOG.info("/v1/nat (took "+Time.makeTimeStringRounded(stopwatch)+") gives: "+data);
         
         // Expect at least one rule
         assertFalse(data.isEmpty());
